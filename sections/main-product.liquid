@@ -34,7 +34,8 @@
         </figure>
       {%- endfor -%}
     {%- else -%}
-      <figure class="product__figure">{% render 'jersey-placeholder' %}</figure>
+      <figure class="product__figure">{% render 'jersey-placeholder', id: section.id, side: 'front' %}</figure>
+      <figure class="product__figure">{% render 'jersey-placeholder', id: section.id, side: 'back' %}</figure>
     {%- endif -%}
   </div>
 

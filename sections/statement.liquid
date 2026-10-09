@@ -1,0 +1,28 @@
+<section class="section statement">
+  {%- if section.settings.label != blank -%}
+    <p class="label">{{ section.settings.label | escape }}</p>
+  {%- endif -%}
+  <div class="statement__body">
+    <h2 class="display reveal">{{ section.settings.heading | escape }}</h2>
+    <div class="statement__text rte reveal">{{ section.settings.text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Small label", "default": "About" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "99WRLDWIDE" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>99WRLDWIDE is the clothing brand under 99. Black and white, built on 1990s football and today's streetwear.</p><p>Every piece is made to order and printed in the EU, so we don't hold stock and nothing sits in a warehouse.</p>"
+    }
+  ],
+  "presets": [
+    { "name": "Statement" }
+  ]
+}
+{% endschema %}

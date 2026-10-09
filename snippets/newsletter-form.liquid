@@ -9,23 +9,26 @@
   {%- if form.posted_successfully? -%}
     <p class="newsletter__msg" role="status" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</p>
   {%- else -%}
-    <div class="newsletter__row">
-      <label class="visually-hidden" for="newsletter-email-{{ id }}">{{ 'newsletter.email' | t }}</label>
-      <input
-        id="newsletter-email-{{ id }}"
-        class="input"
-        type="email"
-        name="contact[email]"
-        value="{{ form.email }}"
-        placeholder="{{ 'newsletter.email' | t }}"
-        autocomplete="email"
-        autocapitalize="off"
-        spellcheck="false"
-        required
-        {% if form.errors %}aria-invalid="true" aria-describedby="newsletter-error-{{ id }}"{% endif %}
-      >
-      <button type="submit" class="btn btn--solid">{{ 'newsletter.subscribe' | t }}</button>
-    </div>
+    <label class="field-line" for="newsletter-email-{{ id }}">
+      <span>{{ 'newsletter.email' | t }}</span>
+      <span class="field-line__row">
+        <input
+          id="newsletter-email-{{ id }}"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+          {% if form.errors %}aria-invalid="true" aria-describedby="newsletter-error-{{ id }}"{% endif %}
+        >
+        <button type="submit" class="field-line__submit">
+          {{- 'newsletter.subscribe' | t -}}
+          {%- render 'icon', name: 'arrow' -%}
+        </button>
+      </span>
+    </label>
     {%- if form.errors -%}
       <p class="newsletter__msg newsletter__msg--error" id="newsletter-error-{{ id }}">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
     {%- endif -%}

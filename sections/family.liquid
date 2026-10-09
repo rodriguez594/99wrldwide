@@ -1,0 +1,64 @@
+<section class="section family">
+  {%- if section.settings.label != blank -%}
+    <p class="label">{{ section.settings.label | escape }}</p>
+  {%- endif -%}
+  <div class="family__grid">
+    {%- for block in section.blocks -%}
+      <article class="house{% if forloop.first %} house--here{% endif %} reveal" {{ block.shopify_attributes }}>
+        <p class="house__tag">{{ block.settings.tag | escape }}</p>
+        <h3>{{ block.settings.title | escape }}</h3>
+        <p class="house__lead">{{ block.settings.lead | escape }}</p>
+        {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+        {%- if block.settings.items != blank -%}
+          <ul>
+            {%- for line in lines -%}
+              {%- assign line = line | strip -%}
+              {%- if line != blank -%}<li>{{ line | escape }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if block.settings.link_label != blank -%}
+          {%- if block.settings.url != blank -%}
+            <a class="house__link" href="{{ block.settings.url }}" target="_blank" rel="noopener">{{ block.settings.link_label | escape }}</a>
+          {%- else -%}
+            <span class="house__link">{{ block.settings.link_label | escape }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Part of 99",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Small label", "default": "Part of 99" }
+  ],
+  "blocks": [
+    {
+      "type": "house",
+      "name": "Brand",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Small tag", "default": "Sister company" },
+        { "type": "text", "id": "title", "label": "Name", "default": "99" },
+        { "type": "text", "id": "lead", "label": "Italic line" },
+        { "type": "textarea", "id": "items", "label": "List", "info": "One item per line." },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Part of 99",
+      "blocks": [
+        { "type": "house", "settings": { "tag": "This site", "title": "99WRLDWIDE", "lead": "Clothing brand" } },
+        { "type": "house", "settings": { "tag": "Sister company", "title": "99MGMT", "lead": "Artist management" } },
+        { "type": "house", "settings": { "tag": "Sister company", "title": "99ENT", "lead": "Video and music production" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,38 +1,24 @@
 <footer class="footer">
-  <div class="footer__top">
-    {%- if section.settings.menu.links.size > 0 -%}
-      <nav class="footer__menu" aria-label="{{ 'general.footer_nav' | t }}">
-        <ul>
-          {%- for link in section.settings.menu.links -%}
-            <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- endif -%}
-
-    {%- if settings.instagram_url != blank -%}
-      <a href="{{ settings.instagram_url }}" target="_blank" rel="noopener" class="footer__social">
-        {%- render 'icon', name: 'instagram' -%}
-        <span>{{ settings.instagram_url | split: '/' | last | prepend: '@' }}</span>
-      </a>
-    {%- endif -%}
-  </div>
-
-  <div class="footer__bottom">
+  <div class="footer__main">
     <img src="{{ 'mark-160.png' | asset_url }}" alt="" width="33" height="30" loading="lazy">
     <p>
       &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape -}}
       {%- if section.settings.tagline != blank %}, {{ section.settings.tagline | escape }}{% endif %}
     </p>
-    {%- if section.blocks.size > 0 -%}
-      <nav class="footer__family" aria-label="99">
+    {%- if section.settings.menu.links.size > 0 or section.blocks.size > 0 or settings.instagram_url != blank -%}
+      <nav class="footer__links" aria-label="{{ 'general.footer_nav' | t }}">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {%- endfor -%}
+        {%- if settings.instagram_url != blank -%}
+          <a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+        {%- endif -%}
         {%- for block in section.blocks -%}
-          <a href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
-            {{- block.settings.label | escape -}}
-          </a>
+          <a href="{{ block.settings.url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
         {%- endfor -%}
       </nav>
     {%- endif -%}
+    <a href="#main" class="footer__top" data-to-top>{{ 'general.back_to_top' | t }}</a>
   </div>
 </footer>
 

@@ -1,70 +1,34 @@
-<header class="header" data-header>
-  <div class="header__inner">
-    {%- if section.settings.menu.links.size > 0 -%}
-      <details class="drawer" data-drawer>
-        <summary class="icon-btn drawer__toggle" aria-label="{{ 'general.menu' | t }}">
-          <span class="drawer__open">{% render 'icon', name: 'menu' %}</span>
-          <span class="drawer__close">{% render 'icon', name: 'close' %}</span>
-        </summary>
-        <nav class="drawer__panel" aria-label="{{ 'general.menu' | t }}">
-          <ul class="drawer__list">
-            {%- for link in section.settings.menu.links -%}
-              <li>
-                <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-              </li>
-            {%- endfor -%}
-          </ul>
-          <div class="drawer__foot">
-            {% render 'localization', id: 'drawer' %}
-            {%- if settings.instagram_url != blank -%}
-              <a href="{{ settings.instagram_url }}" target="_blank" rel="noopener" class="drawer__social">
-                {%- render 'icon', name: 'instagram' -%}
-                <span>Instagram</span>
-              </a>
-            {%- endif -%}
-          </div>
-        </nav>
-      </details>
+<header class="nav" data-header>
+  <a href="{{ routes.root_url }}" class="nav__brand" aria-label="{{ shop.name }}">
+    {%- if section.settings.logo != blank -%}
+      {{ section.settings.logo | image_url: width: 120 | image_tag: alt: '', loading: 'eager' }}
+    {%- else -%}
+      <img src="{{ 'mark-160.png' | asset_url }}" alt="" width="44" height="40">
     {%- endif -%}
+    {%- if section.settings.wordmark != blank -%}
+      <span>{{ section.settings.wordmark | escape }}</span>
+    {%- endif -%}
+  </a>
 
-    <a href="{{ routes.root_url }}" class="header__brand" aria-label="{{ shop.name }}">
-      {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 120 | image_tag: alt: '', class: 'header__mark', loading: 'eager' }}
-      {%- else -%}
-        <img src="{{ 'mark-160.png' | asset_url }}" alt="" width="44" height="40" class="header__mark">
-      {%- endif -%}
-      {%- if section.settings.wordmark != blank -%}
-        <span class="header__word">{{ section.settings.wordmark | escape }}</span>
-      {%- endif -%}
+  <nav class="nav__links" id="nav-menu" aria-label="{{ 'general.main_nav' | t }}">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+    {%- endfor -%}
+    <a href="{{ routes.search_url }}" class="nav__extra">{{ 'general.search' | t }}</a>
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{{ routes.account_url }}" class="nav__extra">{{ 'general.account' | t }}</a>
+    {%- endif -%}
+  </nav>
+
+  <div class="nav__end">
+    <a href="{{ routes.search_url }}" class="nav__text nav__search">{{ 'general.search' | t }}</a>
+    {% render 'localization', id: 'header' %}
+    <a href="{{ routes.cart_url }}" class="nav__text nav__bag" aria-label="{{ 'general.cart_count' | t: count: cart.item_count }}">
+      {{- 'general.bag' | t }} <span class="nav__count">({{ cart.item_count }})</span>
     </a>
-
-    <nav class="header__nav" aria-label="{{ 'general.main_nav' | t }}">
-      <ul>
-        {%- for link in section.settings.menu.links -%}
-          <li>
-            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </nav>
-
-    <div class="header__icons">
-      <div class="header__lang">{% render 'localization', id: 'header' %}</div>
-      <a href="{{ routes.search_url }}" class="icon-btn" aria-label="{{ 'general.search' | t }}">
-        {%- render 'icon', name: 'search' -%}
-      </a>
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{{ routes.account_url }}" class="icon-btn header__account" aria-label="{{ 'general.account' | t }}">
-          {%- render 'icon', name: 'account' -%}
-        </a>
-      {%- endif -%}
-      <a href="{{ routes.cart_url }}" class="icon-btn header__cart" aria-label="{{ 'general.cart_count' | t: count: cart.item_count }}">
-        {%- render 'icon', name: 'bag' -%}
-        {%- if cart.item_count > 0 -%}
-          <span class="header__count" aria-hidden="true">{{ cart.item_count | at_most: 99 }}</span>
-        {%- endif -%}
-      </a>
-    </div>
+    <button class="nav__toggle" type="button" aria-label="{{ 'general.menu' | t }}" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
+      <span></span><span></span>
+    </button>
   </div>
 </header>
 

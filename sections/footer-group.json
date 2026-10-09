@@ -4,22 +4,15 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {
-        "mgmt": {
-          "type": "link",
-          "settings": { "label": "99MGMT", "url": "https://99management.dk" }
-        },
-        "ent": {
-          "type": "link",
-          "settings": { "label": "99ENT", "url": "https://instagram.com/the99ent" }
-        }
-      },
-      "block_order": ["mgmt", "ent"],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "menu": "footer",
         "tagline": "part of 99"
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

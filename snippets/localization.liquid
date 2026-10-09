@@ -1,21 +1,27 @@
 {%- comment -%}
-  EN/DA switch. Shows a button for each other published language; no JS needed.
+  Language switch: a flag that flips to the other language, like 99management.dk.
+  With more than two languages, each other language gets its own flag.
   Usage: {% render 'localization', id: 'header' %}
 {%- endcomment -%}
 {%- if localization.available_languages.size > 1 -%}
   {%- assign form_id = 'localization-' | append: id -%}
+  {%- assign current = localization.language.iso_code -%}
   {%- form 'localization', id: form_id, class: 'lang-form' -%}
     {%- for language in localization.available_languages -%}
-      {%- unless language.iso_code == localization.language.iso_code -%}
+      {%- unless language.iso_code == current -%}
         <button
           type="submit"
-          class="lang"
+          class="flag"
           name="locale_code"
           value="{{ language.iso_code }}"
           lang="{{ language.iso_code }}"
           aria-label="{{ language.endonym_name | capitalize }}"
+          data-flag
         >
-          {{- language.iso_code | upcase -}}
+          <span class="flag__inner">
+            <span class="flag__face">{% render 'flag', code: current, id: form_id %}</span>
+            <span class="flag__face flag__face--back">{% render 'flag', code: language.iso_code, id: form_id %}</span>
+          </span>
         </button>
       {%- endunless -%}
     {%- endfor -%}

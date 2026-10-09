@@ -14,7 +14,9 @@
     "close": "Luk",
     "pagination": "Sider",
     "previous": "Forrige",
-    "next": "Næste"
+    "next": "Næste",
+    "bag": "Kurv",
+    "back_to_top": "Til toppen"
   },
   "products": {
     "add_to_cart": "Læg i kurv",
@@ -25,7 +27,10 @@
     "tax_included": "Inkl. moms.",
     "shipping_at_checkout": "Fragt beregnes ved kassen.",
     "size_guide": "Størrelsesguide",
-    "quantity": "Antal"
+    "quantity": "Antal",
+    "view": "Visning",
+    "front": "Forside",
+    "back": "Bagside"
   },
   "collections": {
     "view_all": "Se alle",

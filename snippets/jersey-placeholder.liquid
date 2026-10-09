@@ -1,7 +1,11 @@
 {%- comment -%}
-  Brand placeholder (pinstripes + NINETY 99) used until real product photos exist.
+  Brand placeholder used until real product photos exist: the jersey drawing.
+  Usage: {% render 'jersey-placeholder', id: 'unique-id', side: 'back' %}
 {%- endcomment -%}
+{%- liquid
+  assign ph_side = side | default: 'front'
+  assign ph_id = id | default: 'ph' | append: ''
+-%}
 <div class="jersey-ph" aria-hidden="true">
-  <span class="jersey-ph__ninety">NINETY</span>
-  <span class="jersey-ph__num">99</span>
+  {% render 'jersey-svg', side: ph_side, id: ph_id %}
 </div>

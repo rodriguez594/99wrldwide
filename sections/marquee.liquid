@@ -1,0 +1,34 @@
+{%- liquid
+  assign items = section.settings.text | split: ','
+-%}
+{%- capture row -%}
+  {%- for item in items -%}
+    <span class="marquee__item">{{ item | strip | escape }}</span>
+    <img class="marquee__mark" src="{{ 'mark-160.png' | asset_url }}" alt="" width="44" height="40" loading="lazy">
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="marquee" aria-label="{{ section.settings.text | escape }}">
+  <div class="marquee__track" aria-hidden="true">
+    <div class="marquee__row">{{ row }}</div>
+    <div class="marquee__row">{{ row }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Words, separated by commas",
+      "default": "Ninety nine, Made to order, Copenhagen, Drop 01, Worldwide"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text"
+    }
+  ]
+}
+{% endschema %}

@@ -20,7 +20,7 @@
                     class: 'card__img'
                 }}
               {%- else -%}
-                {% render 'jersey-placeholder' %}
+                {% render 'jersey-placeholder', id: collection.id %}
               {%- endif -%}
             </div>
             <div class="card__info">

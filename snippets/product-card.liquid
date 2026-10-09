@@ -29,12 +29,12 @@
           }}
         {%- endif -%}
       {%- else -%}
-        {% render 'jersey-placeholder' %}
+        {% render 'jersey-placeholder', id: product.id %}
       {%- endif -%}
     </div>
     <div class="card__info">
       <h3 class="card__title">{{ product.title | escape }}</h3>
-      {% render 'price', product: product %}
+      <span class="card__price">{% render 'price', product: product %}</span>
     </div>
   </a>
 </article>

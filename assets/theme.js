@@ -20,26 +20,65 @@ document.documentElement.classList.add('js');
     items.forEach(function (el) { io.observe(el); });
   }
 
-  // Blurred black header once the page scrolls
+  // Nav: blurred black background after scrolling, full-screen menu on phones
   function initHeader() {
-    var header = document.querySelector('[data-header]');
-    if (!header) return;
-    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 10); };
+    var nav = document.querySelector('[data-header]');
+    if (!nav) return;
+    var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 40); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    var drawer = header.querySelector('[data-drawer]');
-    if (drawer) {
-      drawer.addEventListener('toggle', function () {
-        document.documentElement.classList.toggle('drawer-open', drawer.open);
+    var toggle = nav.querySelector('[data-nav-toggle]');
+    if (!toggle) return;
+    var setOpen = function (open) {
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      document.documentElement.classList.toggle('menu-open', open);
+    };
+    toggle.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
+    nav.querySelectorAll('.nav__links a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+
+  // Language flag: flip to the other flag, then switch language
+  function initFlags() {
+    document.addEventListener('click', function (e) {
+      var flag = e.target.closest('[data-flag]');
+      if (!flag || !flag.form) return;
+      e.preventDefault();
+      flag.classList.add('is-flipping');
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = flag.name;
+      input.value = flag.value;
+      flag.form.appendChild(input);
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () { flag.form.submit(); }, reduce ? 0 : 450);
+    });
+  }
+
+  // Jersey drawing: front/back switch
+  function initJersey(root) {
+    (root || document).querySelectorAll('[data-jersey]').forEach(function (view) {
+      view.querySelectorAll('[data-side]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var back = btn.dataset.side === 'back';
+          view.classList.toggle('is-back', back);
+          view.querySelectorAll('[data-side]').forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle('is-active', on);
+            b.setAttribute('aria-pressed', String(on));
+          });
+        });
       });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && drawer.open) {
-          drawer.open = false;
-          drawer.querySelector('summary').focus();
-        }
-      });
-    }
+    });
   }
 
   // Size picker: find the variant matching the checked options, then update
@@ -141,6 +180,8 @@ document.documentElement.classList.add('js');
   function init() {
     initReveal();
     initHeader();
+    initFlags();
+    initJersey();
     initVariantPicker();
     initAutoSubmit();
     initDialogs();
@@ -152,6 +193,7 @@ document.documentElement.classList.add('js');
   // Re-run when sections are edited in the theme editor
   document.addEventListener('shopify:section:load', function (e) {
     initReveal(e.target);
+    initJersey(e.target);
     initVariantPicker(e.target);
   });
 })();

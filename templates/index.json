@@ -3,29 +3,82 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "pinstripes": true,
-        "show_mark": true,
         "heading": "WRLDWIDE",
-        "tag": "First drop",
+        "tagline": "Luxury streetwear with a 1990s football edge.",
         "meta": "Copenhagen",
-        "button_label": "Shop now",
-        "button_link": ""
+        "button_label": "",
+        "button_link": "",
+        "scroll_label": "Scroll",
+        "scroll_target": "drop"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "text": "Ninety nine, Made to order, Copenhagen, Drop 01, Worldwide"
       }
     },
     "drop": {
       "type": "featured-product",
+      "blocks": {
+        "collar": {
+          "type": "detail",
+          "settings": {
+            "title": "The collar",
+            "text": "Polo collar with three white buttons."
+          }
+        },
+        "stripes": {
+          "type": "detail",
+          "settings": {
+            "title": "Pinstripes",
+            "text": "Thin white stripes on black, three on each sleeve."
+          }
+        },
+        "crest": {
+          "type": "detail",
+          "settings": {
+            "title": "The crest",
+            "text": "A round 99 badge on the chest."
+          }
+        },
+        "back": {
+          "type": "detail",
+          "settings": {
+            "title": "The back",
+            "text": "NINETY above a large 99."
+          }
+        }
+      },
+      "block_order": [
+        "collar",
+        "stripes",
+        "crest",
+        "back"
+      ],
       "settings": {
-        "label": "First drop",
+        "label": "Drop 01",
+        "anchor": "drop",
         "product": "",
         "fallback_title": "The 99 Jersey",
-        "note": "Made to order. Ships from the EU.",
-        "button_label": "View the jersey",
-        "text": "<p>A black pinstripe football jersey with a polo collar, three white buttons and three stripes on each sleeve. The 99 crest sits on the chest. The back says NINETY above a large 99.</p>"
+        "lead": "A 1990s football jersey, cut for now.",
+        "button_label": "Shop the jersey",
+        "soon_label": "Coming soon",
+        "note": "Made to order. Ships from the EU."
+      }
+    },
+    "about": {
+      "type": "statement",
+      "settings": {
+        "label": "About",
+        "heading": "99WRLDWIDE",
+        "text": "<p>99WRLDWIDE is the clothing brand under 99. Black and white, built on 1990s football and today's streetwear.</p><p>Every piece is made to order and printed in the EU, so we don't hold stock and nothing sits in a warehouse.</p>"
       }
     },
     "collection": {
       "type": "featured-collection",
       "settings": {
+        "label": "Shop",
         "heading": "The collection",
         "collection": "",
         "limit": 6,
@@ -35,28 +88,65 @@
     "signup": {
       "type": "newsletter",
       "settings": {
-        "heading": "Be first in line",
+        "label": "Newsletter",
+        "heading": "First in line",
         "text": "<p>Get the release date and early access to every drop.</p>"
       }
     },
-    "follow": {
-      "type": "rich-text",
+    "family": {
+      "type": "family",
+      "blocks": {
+        "wrld": {
+          "type": "house",
+          "settings": {
+            "tag": "This site",
+            "title": "99WRLDWIDE",
+            "lead": "Clothing brand",
+            "items": "The 99 Jersey\nMade to order in the EU",
+            "link_label": "@99wrldwide",
+            "url": "https://instagram.com/99wrldwide"
+          }
+        },
+        "mgmt": {
+          "type": "house",
+          "settings": {
+            "tag": "Sister company",
+            "title": "99MGMT",
+            "lead": "Artist management",
+            "items": "Management and career strategy\nDistribution\nPromotion\nPartnerships and bookings",
+            "link_label": "99management.dk",
+            "url": "https://99management.dk"
+          }
+        },
+        "ent": {
+          "type": "house",
+          "settings": {
+            "tag": "Sister company",
+            "title": "99ENT",
+            "lead": "Video and music production",
+            "items": "Music videos\nPromo videos\nMusic production\nMixing and mastering",
+            "link_label": "@the99ent",
+            "url": "https://instagram.com/the99ent"
+          }
+        }
+      },
+      "block_order": [
+        "wrld",
+        "mgmt",
+        "ent"
+      ],
       "settings": {
-        "heading": "Follow the drop",
-        "text": "<p>Behind the scenes, samples and release dates on Instagram.</p>",
-        "button_label": "@99wrldwide",
-        "button_link": "https://instagram.com/99wrldwide",
-        "solid": false,
-        "new_tab": true,
-        "align": "center"
+        "label": "Part of 99"
       }
     }
   },
   "order": [
     "hero",
+    "marquee",
     "drop",
+    "about",
     "collection",
     "signup",
-    "follow"
+    "family"
   ]
 }

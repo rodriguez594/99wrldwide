@@ -2,10 +2,14 @@
   assign collection = section.settings.collection
   assign columns = section.settings.columns | plus: 0
 -%}
+{%- if collection.products_count > 0 or request.design_mode -%}
 <section class="section">
   <div class="section__head">
     {%- if section.settings.heading != blank -%}
-      <h2 class="display reveal">{{ section.settings.heading | escape }}</h2>
+      <div>
+        {%- if section.settings.label != blank -%}<p class="label">{{ section.settings.label | escape }}</p>{%- endif -%}
+        <h2 class="display reveal">{{ section.settings.heading | escape }}</h2>
+      </div>
     {%- endif -%}
     {%- if collection != blank and collection.products_count > section.settings.limit -%}
       <a href="{{ collection.url }}" class="link-arrow">{{ 'collections.view_all' | t }} {% render 'icon', name: 'arrow' %}</a>
@@ -20,7 +24,7 @@
     {%- else -%}
       {%- for i in (1..columns) -%}
         <article class="card">
-          <div class="card__media">{% render 'jersey-placeholder' %}</div>
+          <div class="card__media">{%- assign ph_id = section.id | append: '-' | append: i -%}{% render 'jersey-placeholder', id: ph_id %}</div>
           <div class="card__info">
             <h3 class="card__title">{{ 'collections.coming_soon' | t }}</h3>
           </div>
@@ -29,11 +33,18 @@
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Featured collection",
   "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Small label",
+      "default": "Shop"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -43,7 +54,8 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Collection",
+      "info": "The section stays hidden until the collection has products."
     },
     {
       "type": "range",

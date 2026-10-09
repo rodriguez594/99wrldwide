@@ -1,8 +1,9 @@
 {%- assign product = section.settings.product -%}
-<section class="section drop">
+<section class="section drop" id="{{ section.settings.anchor | default: 'drop' }}">
   {%- if section.settings.label != blank -%}
     <p class="label">{{ section.settings.label | escape }}</p>
   {%- endif -%}
+
   <div class="drop__body">
     <div class="drop__visual reveal">
       {%- if product.featured_media -%}
@@ -13,43 +14,59 @@
             | image_tag:
               loading: 'lazy',
               widths: '500, 800, 1100, 1400',
-              sizes: '(min-width: 760px) 50vw, 100vw',
+              sizes: '(min-width: 900px) 50vw, 100vw',
               alt: product.featured_media.alt
           }}
         </a>
       {%- else -%}
-        {% render 'jersey-placeholder' %}
+        <div class="jersey-view" data-jersey>
+          <div class="jersey-view__stage">
+            {% render 'jersey-svg', side: 'front', id: section.id %}
+            {% render 'jersey-svg', side: 'back', id: section.id %}
+          </div>
+          <div class="jersey-view__toggle" role="group" aria-label="{{ 'products.view' | t }}">
+            <button type="button" class="jersey-view__btn is-active" data-side="front" aria-pressed="true">{{ 'products.front' | t }}</button>
+            <button type="button" class="jersey-view__btn" data-side="back" aria-pressed="false">{{ 'products.back' | t }}</button>
+          </div>
+        </div>
       {%- endif -%}
     </div>
 
-    <div class="drop__text reveal">
-      <h2 class="display">
+    <div class="drop__text">
+      <h2 class="display reveal">
         {%- if product != blank -%}
           {{ product.title | escape }}
         {%- else -%}
           {{ section.settings.fallback_title | escape }}
         {%- endif -%}
       </h2>
-
-      {%- if product != blank -%}
-        <p class="drop__price">{% render 'price', product: product %}</p>
+      {%- if section.settings.lead != blank -%}
+        <p class="drop__lead reveal">{{ section.settings.lead | escape }}</p>
       {%- endif -%}
 
-      <div class="rte drop__copy">
-        {%- if section.settings.text != blank -%}
-          {{ section.settings.text }}
-        {%- elsif product != blank -%}
-          <p>{{ product.description | strip_html | truncatewords: 45 }}</p>
+      {%- if section.blocks.size > 0 -%}
+        <ol class="spec-list">
+          {%- for block in section.blocks -%}
+            <li class="reveal" {{ block.shopify_attributes }}>
+              <span class="spec-list__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <h3>{{ block.settings.title | escape }}</h3>
+              <p>{{ block.settings.text | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+
+      <div class="drop__buy reveal">
+        {%- if product != blank -%}
+          <p class="drop__price">{% render 'price', product: product %}</p>
+          <a href="{{ product.url }}" class="btn btn--solid">{{ section.settings.button_label | escape }}</a>
+        {%- else -%}
+          <p class="drop__soon">{{ section.settings.soon_label | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}
+          <p class="drop__note">{{ section.settings.note | escape }}</p>
         {%- endif -%}
       </div>
-
-      {%- if section.settings.note != blank -%}
-        <p class="note">{{ section.settings.note | escape }}</p>
-      {%- endif -%}
-
-      {%- if product != blank and section.settings.button_label != blank -%}
-        <a href="{{ product.url }}" class="btn btn--solid drop__btn">{{ section.settings.button_label | escape }}</a>
-      {%- endif -%}
     </div>
   </div>
 </section>
@@ -58,46 +75,34 @@
 {
   "name": "Featured product",
   "settings": [
+    { "type": "text", "id": "label", "label": "Small label", "default": "Drop 01" },
+    { "type": "text", "id": "anchor", "label": "Section id", "default": "drop" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "fallback_title", "label": "Title when no product is picked", "default": "The 99 Jersey" },
+    { "type": "text", "id": "lead", "label": "Italic intro", "default": "A 1990s football jersey, cut for now." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the jersey" },
+    { "type": "text", "id": "soon_label", "label": "Text before the product is live", "default": "Coming soon" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Made to order. Ships from the EU." }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "label",
-      "label": "Small label",
-      "default": "First drop"
-    },
-    {
-      "type": "product",
-      "id": "product",
-      "label": "Product"
-    },
-    {
-      "type": "text",
-      "id": "fallback_title",
-      "label": "Title when no product is picked",
-      "default": "The 99 Jersey"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "info": "Leave empty to use the start of the product description.",
-      "default": "<p>A black pinstripe football jersey with a polo collar, three white buttons and three stripes on each sleeve. The 99 crest sits on the chest. The back says NINETY above a large 99.</p>"
-    },
-    {
-      "type": "text",
-      "id": "note",
-      "label": "Note",
-      "default": "Made to order. Ships from the EU."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "View the jersey"
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Detail" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Featured product"
+      "name": "Featured product",
+      "blocks": [
+        { "type": "detail", "settings": { "title": "The collar", "text": "Polo collar with three white buttons." } },
+        { "type": "detail", "settings": { "title": "Pinstripes", "text": "Thin white stripes on black, three on each sleeve." } },
+        { "type": "detail", "settings": { "title": "The crest", "text": "A round 99 badge on the chest." } },
+        { "type": "detail", "settings": { "title": "The back", "text": "NINETY above a large 99." } }
+      ]
     }
   ]
 }

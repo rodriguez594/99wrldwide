@@ -14,10 +14,12 @@
     "close": "Close",
     "pagination": "Pages",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "bag": "Bag",
+    "back_to_top": "Back to top"
   },
   "products": {
-    "add_to_cart": "Add to cart",
+    "add_to_cart": "Add to bag",
     "sold_out": "Sold out",
     "unavailable": "Unavailable",
     "from_price": "From {{ price }}",
@@ -25,7 +27,10 @@
     "tax_included": "Incl. VAT.",
     "shipping_at_checkout": "Shipping calculated at checkout.",
     "size_guide": "Size guide",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "view": "View",
+    "front": "Front",
+    "back": "Back"
   },
   "collections": {
     "view_all": "View all",
