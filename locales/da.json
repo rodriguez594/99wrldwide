@@ -1,0 +1,103 @@
+{
+  "general": {
+    "skip_to_content": "Gå til indhold",
+    "page": "Side {{ page }}",
+    "menu": "Menu",
+    "main_nav": "Hovedmenu",
+    "footer_nav": "Sidefod",
+    "search": "Søg",
+    "account": "Konto",
+    "cart_count": {
+      "one": "Kurv, {{ count }} vare",
+      "other": "Kurv, {{ count }} varer"
+    },
+    "close": "Luk",
+    "pagination": "Sider",
+    "previous": "Forrige",
+    "next": "Næste"
+  },
+  "products": {
+    "add_to_cart": "Læg i kurv",
+    "sold_out": "Udsolgt",
+    "unavailable": "Ikke tilgængelig",
+    "from_price": "Fra {{ price }}",
+    "regular_price": "Normalpris",
+    "tax_included": "Inkl. moms.",
+    "shipping_at_checkout": "Fragt beregnes ved kassen.",
+    "size_guide": "Størrelsesguide",
+    "quantity": "Antal"
+  },
+  "collections": {
+    "view_all": "Se alle",
+    "coming_soon": "Kommer snart",
+    "empty": "Intet her endnu. Første drop er på vej.",
+    "sort_by": "Sortér efter",
+    "product_count": {
+      "one": "{{ count }} produkt",
+      "other": "{{ count }} produkter"
+    }
+  },
+  "cart": {
+    "title": "Kurv",
+    "empty": "Din kurv er tom.",
+    "continue": "Shop videre",
+    "quantity_for": "Antal af {{ title }}",
+    "remove": "Fjern",
+    "update": "Opdatér kurv",
+    "note": "Besked til ordren",
+    "subtotal": "Subtotal",
+    "taxes_included": "Inkl. moms.",
+    "taxes_at_checkout": "Moms beregnes ved kassen.",
+    "shipping_at_checkout": "Fragt beregnes ved kassen.",
+    "checkout": "Gå til kassen"
+  },
+  "search": {
+    "title": "Søg",
+    "placeholder": "Søg i butikken",
+    "results_for": {
+      "one": "{{ count }} resultat for “{{ terms }}”",
+      "other": "{{ count }} resultater for “{{ terms }}”"
+    },
+    "no_results": "Ingen resultater. Prøv et andet ord."
+  },
+  "not_found": {
+    "title": "Siden findes ikke",
+    "text": "Siden, du leder efter, findes ikke eller er flyttet."
+  },
+  "newsletter": {
+    "email": "E-mail",
+    "subscribe": "Tilmeld",
+    "success": "Du er på listen. Vi skriver til dig før droppet.",
+    "consent": "Når du tilmelder dig, accepterer du at modtage e-mails fra 99WRLDWIDE. Du kan afmelde dig når som helst."
+  },
+  "contact": {
+    "name": "Navn",
+    "email": "E-mail",
+    "order": "Ordrenummer (valgfrit)",
+    "message": "Besked",
+    "send": "Send",
+    "success": "Tak. Vi vender tilbage snarest."
+  },
+  "blog": {
+    "empty": "Ingen indlæg endnu.",
+    "back": "Tilbage til {{ title }}"
+  },
+  "password": {
+    "coming_soon": "Kommer snart",
+    "enter_store": "Gå ind med adgangskode",
+    "password": "Adgangskode",
+    "enter": "Gå ind",
+    "wrong": "Forkert adgangskode. Prøv igen.",
+    "owner": "Butiksejer?",
+    "login": "Log ind her"
+  },
+  "gift_card": {
+    "title": "Gavekort på {{ value }}",
+    "heading": "Dit gavekort",
+    "code": "Gavekortkode",
+    "expires": "Udløber {{ date }}",
+    "unavailable": "Dette gavekort er ikke længere aktivt.",
+    "shop": "Begynd at shoppe",
+    "wallet": "Føj til Apple Wallet"
+  }
+}

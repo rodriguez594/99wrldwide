@@ -1,0 +1,38 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "99WRLDWIDE",
+    "theme_version": "1.0.0",
+    "theme_author": "99",
+    "theme_documentation_url": "https://github.com/rodriguez594/99wrldwide",
+    "theme_support_url": "https://instagram.com/99wrldwide"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Square, at least 32 × 32 px. Leave empty to use the 99 icon."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Social share image",
+        "info": "Shown when the store is shared on social media. Leave empty to use the 99 image. 1200 × 630 px works best."
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram link",
+        "default": "https://instagram.com/99wrldwide"
+      }
+    ]
+  }
+]

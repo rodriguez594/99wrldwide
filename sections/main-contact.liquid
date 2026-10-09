@@ -1,0 +1,41 @@
+<section class="section section--page section--narrow">
+  <div class="page-head">
+    <h1 class="display">{{ page.title | escape }}</h1>
+  </div>
+  {%- if page.content != blank -%}
+    <div class="rte lead">{{ page.content }}</div>
+  {%- endif -%}
+
+  {%- form 'contact', id: 'contact-form', class: 'contact' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="form-msg" role="status" tabindex="-1" autofocus>{{ 'contact.success' | t }}</p>
+    {%- elsif form.errors -%}
+      <div class="form-msg form-msg--error" role="alert">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+
+    <div class="field">
+      <label for="contact-name" class="label label--tight">{{ 'contact.name' | t }}</label>
+      <input id="contact-name" class="input" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+    </div>
+    <div class="field">
+      <label for="contact-email" class="label label--tight">{{ 'contact.email' | t }}</label>
+      <input id="contact-email" class="input" type="email" name="contact[email]" autocomplete="email" value="{{ form.email }}" required>
+    </div>
+    <div class="field">
+      <label for="contact-order" class="label label--tight">{{ 'contact.order' | t }}</label>
+      <input id="contact-order" class="input" type="text" name="contact[order]" value="{{ form.order }}">
+    </div>
+    <div class="field">
+      <label for="contact-body" class="label label--tight">{{ 'contact.message' | t }}</label>
+      <textarea id="contact-body" class="input" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+    </div>
+    <button type="submit" class="btn btn--solid">{{ 'contact.send' | t }}</button>
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": []
+}
+{% endschema %}

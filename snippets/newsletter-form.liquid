@@ -1,0 +1,34 @@
+{%- comment -%}
+  Email sign-up. Subscribers are saved as Shopify customers tagged "newsletter"
+  with email marketing consent.
+  Usage: {% render 'newsletter-form', id: section.id %}
+{%- endcomment -%}
+{%- assign form_id = 'newsletter-' | append: id -%}
+{%- form 'customer', id: form_id, class: 'newsletter' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  {%- if form.posted_successfully? -%}
+    <p class="newsletter__msg" role="status" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</p>
+  {%- else -%}
+    <div class="newsletter__row">
+      <label class="visually-hidden" for="newsletter-email-{{ id }}">{{ 'newsletter.email' | t }}</label>
+      <input
+        id="newsletter-email-{{ id }}"
+        class="input"
+        type="email"
+        name="contact[email]"
+        value="{{ form.email }}"
+        placeholder="{{ 'newsletter.email' | t }}"
+        autocomplete="email"
+        autocapitalize="off"
+        spellcheck="false"
+        required
+        {% if form.errors %}aria-invalid="true" aria-describedby="newsletter-error-{{ id }}"{% endif %}
+      >
+      <button type="submit" class="btn btn--solid">{{ 'newsletter.subscribe' | t }}</button>
+    </div>
+    {%- if form.errors -%}
+      <p class="newsletter__msg newsletter__msg--error" id="newsletter-error-{{ id }}">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+    {%- endif -%}
+    <p class="newsletter__fine">{{ 'newsletter.consent' | t }}</p>
+  {%- endif -%}
+{%- endform -%}

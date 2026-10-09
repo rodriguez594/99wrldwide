@@ -1,0 +1,14 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "wordmark": "WRLDWIDE",
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": ["header"]
+}

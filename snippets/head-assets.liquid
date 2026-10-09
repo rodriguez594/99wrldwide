@@ -1,0 +1,39 @@
+{%- comment -%}
+  Favicons, self-hosted fonts, stylesheet and script. Shared by both layouts.
+  Fonts are served from the theme (not Google Fonts) so visitor IPs aren't sent to a third party.
+{%- endcomment -%}
+{%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+{%- else -%}
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'icon-32.png' | asset_url }}">
+{%- endif -%}
+<link rel="apple-touch-icon" href="{{ 'icon-180.png' | asset_url }}">
+
+{{ 'bodoni-moda.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'inter.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+<style>
+  @font-face {
+    font-family: "Bodoni Moda";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("{{ 'bodoni-moda.woff2' | asset_url }}") format("woff2");
+  }
+  @font-face {
+    font-family: "Bodoni Moda";
+    font-style: italic;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("{{ 'bodoni-moda-italic.woff2' | asset_url }}") format("woff2");
+  }
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url("{{ 'inter.woff2' | asset_url }}") format("woff2");
+  }
+</style>
+
+{{ 'base.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'theme.js' | asset_url }}" defer></script>

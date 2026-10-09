@@ -1,0 +1,13 @@
+<section class="section section--page section--center notfound">
+  <p class="notfound__num" aria-hidden="true">404</p>
+  <h1 class="display">{{ 'not_found.title' | t }}</h1>
+  <p class="lead">{{ 'not_found.text' | t }}</p>
+  <a href="{{ routes.all_products_collection_url }}" class="btn btn--solid">{{ 'cart.continue' | t }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

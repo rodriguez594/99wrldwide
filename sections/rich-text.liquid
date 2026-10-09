@@ -1,0 +1,85 @@
+<section class="section section--{{ section.settings.align }}">
+  {%- if section.settings.label != blank -%}
+    <p class="label">{{ section.settings.label | escape }}</p>
+  {%- endif -%}
+  {%- if section.settings.heading != blank -%}
+    <h2 class="display reveal">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+  {%- if section.settings.text != blank -%}
+    <div class="rte lead reveal">{{ section.settings.text }}</div>
+  {%- endif -%}
+  {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+    <div class="reveal">
+      <a
+        href="{{ section.settings.button_link }}"
+        class="btn{% if section.settings.solid %} btn--solid{% endif %}"
+        {% if section.settings.new_tab %}target="_blank" rel="noopener"{% endif %}
+      >
+        {{- section.settings.button_label | escape -}}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Small label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow the drop"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Behind the scenes, samples and release dates on Instagram.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "@99wrldwide"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "solid",
+      "label": "Solid button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "new_tab",
+      "label": "Open link in a new tab",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text"
+    }
+  ]
+}
+{% endschema %}

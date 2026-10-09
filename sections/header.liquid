@@ -1,0 +1,99 @@
+<header class="header" data-header>
+  <div class="header__inner">
+    {%- if section.settings.menu.links.size > 0 -%}
+      <details class="drawer" data-drawer>
+        <summary class="icon-btn drawer__toggle" aria-label="{{ 'general.menu' | t }}">
+          <span class="drawer__open">{% render 'icon', name: 'menu' %}</span>
+          <span class="drawer__close">{% render 'icon', name: 'close' %}</span>
+        </summary>
+        <nav class="drawer__panel" aria-label="{{ 'general.menu' | t }}">
+          <ul class="drawer__list">
+            {%- for link in section.settings.menu.links -%}
+              <li>
+                <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+          <div class="drawer__foot">
+            {% render 'localization', id: 'drawer' %}
+            {%- if settings.instagram_url != blank -%}
+              <a href="{{ settings.instagram_url }}" target="_blank" rel="noopener" class="drawer__social">
+                {%- render 'icon', name: 'instagram' -%}
+                <span>Instagram</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </nav>
+      </details>
+    {%- endif -%}
+
+    <a href="{{ routes.root_url }}" class="header__brand" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 120 | image_tag: alt: '', class: 'header__mark', loading: 'eager' }}
+      {%- else -%}
+        <img src="{{ 'mark-160.png' | asset_url }}" alt="" width="44" height="40" class="header__mark">
+      {%- endif -%}
+      {%- if section.settings.wordmark != blank -%}
+        <span class="header__word">{{ section.settings.wordmark | escape }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav" aria-label="{{ 'general.main_nav' | t }}">
+      <ul>
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__icons">
+      <div class="header__lang">{% render 'localization', id: 'header' %}</div>
+      <a href="{{ routes.search_url }}" class="icon-btn" aria-label="{{ 'general.search' | t }}">
+        {%- render 'icon', name: 'search' -%}
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="icon-btn header__account" aria-label="{{ 'general.account' | t }}">
+          {%- render 'icon', name: 'account' -%}
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="icon-btn header__cart" aria-label="{{ 'general.cart_count' | t: count: cart.item_count }}">
+        {%- render 'icon', name: 'bag' -%}
+        {%- if cart.item_count > 0 -%}
+          <span class="header__count" aria-hidden="true">{{ cart.item_count | at_most: 99 }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo mark",
+      "info": "Leave empty to use the white 99 mark."
+    },
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Word next to the mark",
+      "default": "WRLDWIDE"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  EN/DA switch. Shows a button for each other published language; no JS needed.
+  Usage: {% render 'localization', id: 'header' %}
+{%- endcomment -%}
+{%- if localization.available_languages.size > 1 -%}
+  {%- assign form_id = 'localization-' | append: id -%}
+  {%- form 'localization', id: form_id, class: 'lang-form' -%}
+    {%- for language in localization.available_languages -%}
+      {%- unless language.iso_code == localization.language.iso_code -%}
+        <button
+          type="submit"
+          class="lang"
+          name="locale_code"
+          value="{{ language.iso_code }}"
+          lang="{{ language.iso_code }}"
+          aria-label="{{ language.endonym_name | capitalize }}"
+        >
+          {{- language.iso_code | upcase -}}
+        </button>
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endform -%}
+{%- endif -%}

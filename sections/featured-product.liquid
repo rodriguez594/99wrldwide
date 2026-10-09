@@ -1,0 +1,104 @@
+{%- assign product = section.settings.product -%}
+<section class="section drop">
+  {%- if section.settings.label != blank -%}
+    <p class="label">{{ section.settings.label | escape }}</p>
+  {%- endif -%}
+  <div class="drop__body">
+    <div class="drop__visual reveal">
+      {%- if product.featured_media -%}
+        <a href="{{ product.url }}" class="drop__media" tabindex="-1" aria-hidden="true">
+          {{
+            product.featured_media
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '500, 800, 1100, 1400',
+              sizes: '(min-width: 760px) 50vw, 100vw',
+              alt: product.featured_media.alt
+          }}
+        </a>
+      {%- else -%}
+        {% render 'jersey-placeholder' %}
+      {%- endif -%}
+    </div>
+
+    <div class="drop__text reveal">
+      <h2 class="display">
+        {%- if product != blank -%}
+          {{ product.title | escape }}
+        {%- else -%}
+          {{ section.settings.fallback_title | escape }}
+        {%- endif -%}
+      </h2>
+
+      {%- if product != blank -%}
+        <p class="drop__price">{% render 'price', product: product %}</p>
+      {%- endif -%}
+
+      <div class="rte drop__copy">
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- elsif product != blank -%}
+          <p>{{ product.description | strip_html | truncatewords: 45 }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.note != blank -%}
+        <p class="note">{{ section.settings.note | escape }}</p>
+      {%- endif -%}
+
+      {%- if product != blank and section.settings.button_label != blank -%}
+        <a href="{{ product.url }}" class="btn btn--solid drop__btn">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Small label",
+      "default": "First drop"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Title when no product is picked",
+      "default": "The 99 Jersey"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "info": "Leave empty to use the start of the product description.",
+      "default": "<p>A black pinstripe football jersey with a polo collar, three white buttons and three stripes on each sleeve. The 99 crest sits on the chest. The back says NINETY above a large 99.</p>"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Made to order. Ships from the EU."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View the jersey"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product"
+    }
+  ]
+}
+{% endschema %}

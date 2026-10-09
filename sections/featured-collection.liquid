@@ -1,0 +1,75 @@
+{%- liquid
+  assign collection = section.settings.collection
+  assign columns = section.settings.columns | plus: 0
+-%}
+<section class="section">
+  <div class="section__head">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="display reveal">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if collection != blank and collection.products_count > section.settings.limit -%}
+      <a href="{{ collection.url }}" class="link-arrow">{{ 'collections.view_all' | t }} {% render 'icon', name: 'arrow' %}</a>
+    {%- endif -%}
+  </div>
+
+  <div class="grid grid--{{ section.settings.columns }}">
+    {%- if collection != blank and collection.products_count > 0 -%}
+      {%- for product in collection.products limit: section.settings.limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..columns) -%}
+        <article class="card">
+          <div class="card__media">{% render 'jersey-placeholder' %}</div>
+          <div class="card__info">
+            <h3 class="card__title">{{ 'collections.coming_soon' | t }}</h3>
+          </div>
+        </article>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

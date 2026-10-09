@@ -1,0 +1,24 @@
+<article class="section section--page section--narrow">
+  <div class="page-head">
+    <p class="label label--tight">{{ article.published_at | time_tag: format: 'date' }}</p>
+    <h1 class="display">{{ article.title | escape }}</h1>
+  </div>
+  {%- if article.image -%}
+    <div class="article__image">
+      {{
+        article.image
+        | image_url: width: 1600
+        | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 780px, 100vw'
+      }}
+    </div>
+  {%- endif -%}
+  <div class="rte">{{ article.content }}</div>
+  <p><a href="{{ blog.url }}" class="link-underline">{{ 'blog.back' | t: title: blog.title }}</a></p>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

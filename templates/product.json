@@ -1,0 +1,80 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variants": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_guide": {
+          "type": "size_guide",
+          "settings": {}
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": false,
+            "show_dynamic_checkout": true
+          }
+        },
+        "note": {
+          "type": "note",
+          "settings": {
+            "text": "Made to order. Ships from the EU."
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping and returns"
+          }
+        },
+        "care": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Material and care",
+            "text": "<p>100% polyester, printed with sublimation so the design won't crack or fade. Wash inside out at 30°C. Don't tumble dry or iron the print.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variants",
+        "size_guide",
+        "buy",
+        "note",
+        "description",
+        "shipping",
+        "care"
+      ],
+      "settings": {}
+    },
+    "more": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "More from 99WRLDWIDE",
+        "collection": "",
+        "limit": 3,
+        "columns": "3"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "more"
+  ]
+}

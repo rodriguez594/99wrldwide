@@ -1,0 +1,29 @@
+{%- comment -%}
+  Usage: {% render 'price', product: product %} or {% render 'price', variant: variant %}
+  With a product, shows "From" when variant prices differ.
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign price = variant.price
+    assign compare_at = variant.compare_at_price
+    assign available = variant.available
+  else
+    assign price = product.price
+    assign compare_at = product.compare_at_price
+    assign available = product.available
+  endif
+-%}
+<span class="price{% if compare_at > price %} price--sale{% endif %}">
+  {%- if product and product.price_varies -%}
+    {%- assign price_money = price | money -%}
+    <span class="price__now">{{ 'products.from_price' | t: price: price_money }}</span>
+  {%- else -%}
+    <span class="price__now">{{ price | money }}</span>
+  {%- endif -%}
+  {%- if compare_at > price -%}
+    <s class="price__was"><span class="visually-hidden">{{ 'products.regular_price' | t }}</span>{{ compare_at | money }}</s>
+  {%- endif -%}
+  {%- unless available -%}
+    <span class="price__badge">{{ 'products.sold_out' | t }}</span>
+  {%- endunless -%}
+</span>

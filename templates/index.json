@@ -1,0 +1,61 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "pinstripes": true,
+        "show_mark": true,
+        "heading": "WRLDWIDE",
+        "tag": "First drop",
+        "meta": "Copenhagen",
+        "button_label": "Shop now",
+        "button_link": ""
+      }
+    },
+    "drop": {
+      "type": "featured-product",
+      "settings": {
+        "label": "First drop",
+        "product": "",
+        "fallback_title": "The 99 Jersey",
+        "note": "Made to order. Ships from the EU.",
+        "button_label": "View the jersey"
+      }
+    },
+    "collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "The collection",
+        "collection": "",
+        "limit": 6,
+        "columns": "3"
+      }
+    },
+    "signup": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Be first in line",
+        "text": "<p>Get the release date and early access to every drop.</p>"
+      }
+    },
+    "follow": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Follow the drop",
+        "text": "<p>Behind the scenes, samples and release dates on Instagram.</p>",
+        "button_label": "@99wrldwide",
+        "button_link": "https://instagram.com/99wrldwide",
+        "solid": false,
+        "new_tab": true,
+        "align": "center"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "drop",
+    "collection",
+    "signup",
+    "follow"
+  ]
+}

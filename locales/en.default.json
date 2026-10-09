@@ -1,0 +1,103 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "page": "Page {{ page }}",
+    "menu": "Menu",
+    "main_nav": "Main",
+    "footer_nav": "Footer",
+    "search": "Search",
+    "account": "Account",
+    "cart_count": {
+      "one": "Cart, {{ count }} item",
+      "other": "Cart, {{ count }} items"
+    },
+    "close": "Close",
+    "pagination": "Pages",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "from_price": "From {{ price }}",
+    "regular_price": "Regular price",
+    "tax_included": "Incl. VAT.",
+    "shipping_at_checkout": "Shipping calculated at checkout.",
+    "size_guide": "Size guide",
+    "quantity": "Quantity"
+  },
+  "collections": {
+    "view_all": "View all",
+    "coming_soon": "Coming soon",
+    "empty": "Nothing here yet. The first drop is on its way.",
+    "sort_by": "Sort by",
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue": "Continue shopping",
+    "quantity_for": "Quantity for {{ title }}",
+    "remove": "Remove",
+    "update": "Update cart",
+    "note": "Order note",
+    "subtotal": "Subtotal",
+    "taxes_included": "Incl. VAT.",
+    "taxes_at_checkout": "Taxes calculated at checkout.",
+    "shipping_at_checkout": "Shipping calculated at checkout.",
+    "checkout": "Check out"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search the store",
+    "results_for": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    },
+    "no_results": "No results. Try another word."
+  },
+  "not_found": {
+    "title": "Page not found",
+    "text": "The page you're looking for doesn't exist or has moved."
+  },
+  "newsletter": {
+    "email": "Email",
+    "subscribe": "Sign up",
+    "success": "You're on the list. We'll email you before the drop.",
+    "consent": "By signing up you agree to receive emails from 99WRLDWIDE. Unsubscribe any time."
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "order": "Order number (optional)",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thanks. We'll get back to you soon."
+  },
+  "blog": {
+    "empty": "No posts yet.",
+    "back": "Back to {{ title }}"
+  },
+  "password": {
+    "coming_soon": "Coming soon",
+    "enter_store": "Enter with password",
+    "password": "Password",
+    "enter": "Enter",
+    "wrong": "Wrong password. Try again.",
+    "owner": "Store owner?",
+    "login": "Log in here"
+  },
+  "gift_card": {
+    "title": "{{ value }} gift card",
+    "heading": "Your gift card",
+    "code": "Gift card code",
+    "expires": "Expires {{ date }}",
+    "unavailable": "This gift card is no longer active.",
+    "shop": "Start shopping",
+    "wallet": "Add to Apple Wallet"
+  }
+}

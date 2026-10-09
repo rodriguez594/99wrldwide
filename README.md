@@ -1,21 +1,40 @@
-# 99WRLDWIDE
+# 99WRLDWIDE Shopify theme
 
-Coming-soon site for 99WRLDWIDE, the clothing brand under 99 (with 99MGMT and 99ENT). Plain HTML/CSS/JS, no build step.
+This branch holds the custom Shopify theme for 99WRLDWIDE (Online Store 2.0). The theme files sit at the branch root so Shopify's GitHub integration can sync them.
 
-- `index.html` – content (English text)
-- `main.js` – Danish translations and the language switch
-- `styles.css` – black and white theme with jersey pinstripes
-- `assets/` – 99 mark, favicons, social preview image
+**Do not merge this branch into `main`.** `main` is the GitHub Pages coming-soon site; this branch removes those files.
 
-This repo is public (needed for free GitHub Pages), so keep pricing, costs and unreleased designs out of it.
+This repo is public, so keep pricing, costs, margins and unreleased designs out of it.
 
-## Publishing
-Deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main`.
-One-time setup: repo Settings → Pages → Source: **GitHub Actions**.
+## What's in it
+- `layout/` – `theme.liquid` (every page) and `password.liquid` (pre-launch page)
+- `templates/` – home, product, collection, collections list, cart, search, 404, page, contact page, blog, article, password, gift card
+- `sections/` – header, footer, hero, featured product, featured collection, email sign-up, rich text, plus the `main-*` section for each template
+- `snippets/` – product card, price, icons, EN/DA language switch, pagination, newsletter form, NINETY 99 placeholder
+- `assets/` – `base.css`, `theme.js`, the 99 mark and icons, and the self-hosted fonts (Bodoni Moda, Inter). The fonts are served from Shopify, not Google Fonts, so visitor IPs aren't sent to Google (GDPR).
+- `locales/` – English (`en.default.json`) and Danish (`da.json`) storefront text
 
-## Custom domain (later)
-1. Add a `CNAME` file containing the domain, e.g. `99wrldwide.com`.
-2. At the DNS provider, add A records for the domain → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, and a CNAME `www` → `rodriguez594.github.io`.
-3. In repo Settings → Pages, set the custom domain and tick "Enforce HTTPS".
+The design matches 99management.dk: black and white, Bodoni Moda headings, Inter body text, jersey pinstripes.
 
-When the Shopify store opens, give it its own address (e.g. `shop.99wrldwide.com`) and link to it from this page.
+## Connect it to Shopify
+1. Shopify admin → Online Store → Themes → Add theme → **Connect from GitHub**.
+2. Pick `rodriguez594/99wrldwide` and this branch.
+3. Preview, customize, then Publish when ready.
+
+Edits made in the theme editor are committed back to this branch by Shopify (mostly `config/settings_data.json` and `templates/*.json`), so pull before editing code.
+
+## Set up in the Shopify admin
+- **Menus** (Online Store → Navigation): `main-menu` for the header (e.g. Shop → /collections/all), `footer` for the footer (shipping, returns, privacy, terms, contact).
+- **Pages:** a "Size guide" page (pick it in the product page's Size guide block), "Shipping and returns" (14-day right of withdrawal), and a "Contact" page using the `page.contact` template.
+- **Policies:** Settings → Policies (refund, privacy, terms, shipping).
+- **Danish:** Settings → Languages → add Danish and publish it. The theme's UI text is already translated. Translate your own content (product text, section headings) with the free Translate & Adapt app. The DA/EN button then appears in the header.
+- **Taxes:** Settings → Taxes → "Include tax in prices", so prices show with 25% VAT and the theme says "Incl. VAT."
+- **Pre-launch:** Online Store → Preferences → Password protection. Visitors see the password page with the email sign-up. Sign-ups are saved as customers tagged `newsletter`.
+- **Home page:** in the theme editor, pick "The 99 Jersey" in the Featured product section and a collection in Featured collection. Until then they show the NINETY 99 placeholder.
+
+## Check the code
+```
+npm i -g @shopify/cli
+shopify theme check --path .
+shopify theme dev --store <store>.myshopify.com   # local preview against a real store
+```
