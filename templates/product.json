@@ -17,7 +17,9 @@
         },
         "size_guide": {
           "type": "size_guide",
-          "settings": {}
+          "settings": {
+            "text": "<p>Regular, athletic fit. If you're between sizes, size up for a looser, vintage look. Full measurements coming with the first drop.</p>"
+          }
         },
         "buy": {
           "type": "buy_buttons",
@@ -39,7 +41,8 @@
         "shipping": {
           "type": "collapsible",
           "settings": {
-            "heading": "Shipping and returns"
+            "heading": "Shipping and returns",
+            "text": "<p>Every piece is made to order and ships from the EU, so there are no customs fees inside the EU. You have 14 days to return an order after you receive it.</p>"
           }
         },
         "care": {
