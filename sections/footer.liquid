@@ -18,6 +18,11 @@
         {%- endfor -%}
       </nav>
     {%- endif -%}
+    {%- if localization.available_countries.size > 1 -%}
+      <button type="button" class="footer__region" data-region-open>
+        {{- localization.country.name }} · {{ localization.country.currency.iso_code -}}
+      </button>
+    {%- endif -%}
     <a href="#main" class="footer__top" data-to-top>{{ 'general.back_to_top' | t }}</a>
   </div>
 </footer>

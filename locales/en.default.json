@@ -104,5 +104,12 @@
     "unavailable": "This gift card is no longer active.",
     "shop": "Start shopping",
     "wallet": "Add to Apple Wallet"
+  },
+  "region": {
+    "title": "Where are you shopping from?",
+    "denmark": "Denmark",
+    "world": "Rest of the world",
+    "ship_to": "Ship to",
+    "fine": "You can change this any time at the bottom of the page."
   }
 }

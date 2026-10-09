@@ -104,5 +104,12 @@
     "unavailable": "Dette gavekort er ikke længere aktivt.",
     "shop": "Begynd at shoppe",
     "wallet": "Føj til Apple Wallet"
+  },
+  "region": {
+    "title": "Hvor handler du fra?",
+    "denmark": "Danmark",
+    "world": "Resten af verden",
+    "ship_to": "Send til",
+    "fine": "Du kan altid ændre det nederst på siden."
   }
 }

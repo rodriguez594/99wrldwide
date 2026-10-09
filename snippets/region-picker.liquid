@@ -1,0 +1,68 @@
+{%- comment -%}
+  First-visit choice between Denmark and the rest of the world.
+  Picking one switches the Shopify country, so prices show in that market's currency
+  (DKK for Denmark, the international market's currency for everyone else).
+  Only shown when the store sells to more than one country.
+{%- endcomment -%}
+{%- if localization.available_countries.size > 1 and request.design_mode == false -%}
+  {%- liquid
+    assign dk = null
+    assign world = null
+    assign us = null
+    for country in localization.available_countries
+      if country.iso_code == 'DK'
+        assign dk = country
+      elsif country.iso_code == 'US'
+        assign us = country
+      elsif world == null
+        assign world = country
+      endif
+    endfor
+    if localization.country.iso_code != 'DK'
+      assign world = localization.country
+    elsif us
+      assign world = us
+    endif
+  -%}
+  <dialog class="region" id="region-picker" aria-labelledby="region-title" data-region>
+    <div class="region__inner">
+      <img src="{{ 'mark.png' | asset_url }}" alt="" width="959" height="882" class="region__mark">
+      <h2 class="region__title" id="region-title">{{ 'region.title' | t }}</h2>
+
+      <div class="region__options">
+        {%- if dk -%}
+          {%- form 'localization', id: 'region-dk', class: 'region__form' -%}
+            <input type="hidden" name="country_code" value="DK">
+            <button type="submit" class="region__option{% if localization.country.iso_code == 'DK' %} is-current{% endif %}" data-region-choice>
+              <span class="region__flag">{% render 'flag', code: 'da', id: 'region' %}</span>
+              <span class="region__name">{{ 'region.denmark' | t }}</span>
+              <span class="region__cur">{{ dk.currency.iso_code }} {{ dk.currency.symbol }}</span>
+            </button>
+          {%- endform -%}
+        {%- endif -%}
+
+        {%- if world -%}
+          {%- form 'localization', id: 'region-world', class: 'region__form' -%}
+            <button type="submit" class="region__option{% if localization.country.iso_code != 'DK' %} is-current{% endif %}" data-region-choice>
+              <span class="region__flag region__flag--globe">{% render 'icon', name: 'globe' %}</span>
+              <span class="region__name">{{ 'region.world' | t }}</span>
+              <span class="region__cur">{{ world.currency.iso_code }} {{ world.currency.symbol }}</span>
+            </button>
+            <label class="region__ship">
+              <span>{{ 'region.ship_to' | t }}</span>
+              <select name="country_code" class="select">
+                {%- for country in localization.available_countries -%}
+                  {%- unless country.iso_code == 'DK' -%}
+                    <option value="{{ country.iso_code }}"{% if country.iso_code == world.iso_code %} selected{% endif %}>{{ country.name }}</option>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </select>
+            </label>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+
+      <p class="region__fine">{{ 'region.fine' | t }}</p>
+    </div>
+  </dialog>
+{%- endif -%}

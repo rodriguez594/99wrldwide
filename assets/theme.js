@@ -177,11 +177,33 @@ document.documentElement.classList.add('js');
     }, true);
   }
 
+  // First visit: ask Denmark or rest of the world (sets the Shopify country and currency)
+  function initRegion() {
+    var dialog = document.querySelector('[data-region]');
+    if (!dialog || !dialog.showModal) return;
+    var KEY = 'region-chosen';
+    var remember = function () { try { localStorage.setItem(KEY, '1'); } catch (e) {} };
+    var seen = false;
+    try { seen = localStorage.getItem(KEY) === '1'; } catch (e) { seen = true; }
+    if (!seen) dialog.showModal();
+    dialog.addEventListener('close', remember);
+    dialog.querySelectorAll('form').forEach(function (form) {
+      form.addEventListener('submit', remember);
+    });
+    // Changing the "ship to" country picks the rest-of-world option straight away
+    var select = dialog.querySelector('select[name="country_code"]');
+    if (select) select.addEventListener('change', function () { remember(); select.form.submit(); });
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-region-open]')) dialog.showModal();
+    });
+  }
+
   function init() {
     initReveal();
     initHeader();
     initFlags();
     initJersey();
+    initRegion();
     initVariantPicker();
     initAutoSubmit();
     initDialogs();
